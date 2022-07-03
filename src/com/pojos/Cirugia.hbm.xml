@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 2, 2022 3:13:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.Cirugia" table="cirugia" catalog="db_clinica" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="secretaria" class="com.pojos.Secretaria" fetch="select">
+            <column name="secretaria_id" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="hora" type="time">
+            <column name="hora" length="8" not-null="true" />
+        </property>
+        <property name="nroSala" type="int">
+            <column name="nro_sala" not-null="true" />
+        </property>
+        <set name="cirugiaMedicos" table="cirugia_medico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cirugia_id" not-null="true" />
+            </key>
+            <one-to-many class="com.pojos.CirugiaMedico" />
+        </set>
+    </class>
+</hibernate-mapping>

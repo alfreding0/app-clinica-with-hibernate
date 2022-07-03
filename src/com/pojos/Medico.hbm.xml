@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 2, 2022 3:13:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.Medico" table="medico" catalog="db_clinica" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="codigoInterno" type="string">
+            <column name="codigo_interno" length="10" not-null="true" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="nombres" length="20" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="20" not-null="true" />
+        </property>
+        <property name="ci" type="string">
+            <column name="ci" length="12" not-null="true" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="12" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="200" not-null="true" />
+        </property>
+        <set name="cirugiaMedicos" table="cirugia_medico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="medico_id" not-null="true" />
+            </key>
+            <one-to-many class="com.pojos.CirugiaMedico" />
+        </set>
+    </class>
+</hibernate-mapping>
