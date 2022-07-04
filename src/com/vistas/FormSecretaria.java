@@ -58,6 +58,8 @@ public class FormSecretaria extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        txtBuscarPorNombre = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -77,22 +79,22 @@ public class FormSecretaria extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtDireccion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 260, 29));
+        jPanel2.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 370, 29));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Direccion");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 148, 29));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 148, 29));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Celular");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 148, 29));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 148, 29));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 148, 29));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 148, 29));
 
         txtID.setEditable(false);
         txtID.setBackground(new java.awt.Color(102, 51, 0));
@@ -104,13 +106,13 @@ public class FormSecretaria extends javax.swing.JFrame {
                 txtIDActionPerformed(evt);
             }
         });
-        jPanel2.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 70, 29));
+        jPanel2.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 140, 29));
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 260, 29));
+        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 370, 29));
 
         txtCelular.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 260, 29));
+        jPanel2.add(txtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 370, 29));
 
         jButton4.setBackground(new java.awt.Color(13, 28, 42));
         jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -122,7 +124,7 @@ public class FormSecretaria extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 140, 40));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 140, 40));
 
         jButton6.setBackground(new java.awt.Color(13, 28, 42));
         jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -134,7 +136,7 @@ public class FormSecretaria extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 140, 40));
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 140, 40));
 
         jButton5.setBackground(new java.awt.Color(13, 28, 42));
         jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -146,7 +148,7 @@ public class FormSecretaria extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 140, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 140, 40));
 
         jButton3.setBackground(new java.awt.Color(13, 28, 42));
         jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -158,7 +160,7 @@ public class FormSecretaria extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 140, 40));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 140, 40));
 
         jButton1.setBackground(new java.awt.Color(13, 28, 42));
         jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -170,7 +172,7 @@ public class FormSecretaria extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 140, 40));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, 140, 40));
 
         jButton2.setBackground(new java.awt.Color(13, 28, 42));
         jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -182,7 +184,7 @@ public class FormSecretaria extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 140, 40));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 140, 40));
 
         tabla.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -201,7 +203,27 @@ public class FormSecretaria extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 550, 170));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 550, 170));
+
+        txtBuscarPorNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtBuscarPorNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarPorNombreKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtBuscarPorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 330, 30));
+
+        jButton7.setBackground(new java.awt.Color(13, 28, 42));
+        jButton7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/buscar.png"))); // NOI18N
+        jButton7.setText("Buscar por nombre");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 220, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 790, 440));
 
@@ -244,6 +266,14 @@ public class FormSecretaria extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        this.buscarSecretariaPorNombre();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void txtBuscarPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPorNombreKeyReleased
+        this.buscarSecretariaPorNombre();
+    }//GEN-LAST:event_txtBuscarPorNombreKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -252,6 +282,7 @@ public class FormSecretaria extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -260,6 +291,7 @@ public class FormSecretaria extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtBuscarPorNombre;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtID;
@@ -268,10 +300,13 @@ public class FormSecretaria extends javax.swing.JFrame {
 
     private void mostrarListaSecretarias(){
         List<Secretaria> listaSecretarias  = daoSecretaria.getListaSecretarias();
-        
+        this.cargarListaATabla(listaSecretarias);
+    }
+    
+    private void cargarListaATabla(List<Secretaria> lista){
         DefaultTableModel model = new DefaultTableModel(null, new String[] {"ID", "Nombre", "Celular", "Direccion"});
         
-        listaSecretarias.forEach((secre) -> {
+        lista.forEach((secre) -> {
             model.addRow(new Object[]{secre.getId(), secre.getNombreCompleto(), secre.getCelular(), secre.getDireccion()});
         });
         
@@ -315,5 +350,10 @@ public class FormSecretaria extends javax.swing.JFrame {
     private void buscarSecretariaHastaBD() {
         FormCirugia.cirugia.setSecretaria(daoSecretaria.buscarSecretariaPorID(Integer.parseInt(txtID.getText())));
         FormCirugia.txtSecretaria.setText(daoSecretaria.buscarSecretariaPorID(Integer.parseInt(txtID.getText())).getNombreCompleto());
+    }
+
+    private void buscarSecretariaPorNombre() {
+        List<Secretaria> lista = daoSecretaria.buscarSecretariasPorNombre(txtBuscarPorNombre.getText());
+        this.cargarListaATabla(lista);
     }
 }

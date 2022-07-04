@@ -7,7 +7,6 @@ package com.dao;
 
 import com.pojos.CirugiaMedico;
 import com.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -19,61 +18,70 @@ import org.hibernate.Session;
  */
 public class DaoCirugiaMedico {
 
-    public String insertarCirugiaMedico(CirugiaMedico cirugiaMedico) {
+    public boolean insertarCirugiaMedico(CirugiaMedico cirugiaMedico) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(cirugiaMedico);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Insertado";
+        return response;
     }
 
-    public String modificarCirugiaMedico(CirugiaMedico cirugiaMedico) {
+    public boolean modificarCirugiaMedico(CirugiaMedico cirugiaMedico) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(cirugiaMedico);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Modificado";
+        return response;
     }
 
-    public String eliminarCirugiaMedico(CirugiaMedico cirugiaMedico) {
+    public boolean eliminarCirugiaMedico(CirugiaMedico cirugiaMedico) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(cirugiaMedico);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Eliminado";
+        return response;
     }
 
     //Retorna todas las cirugiaMedicos de la BD

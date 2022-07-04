@@ -18,61 +18,70 @@ import org.hibernate.Session;
  */
 public class DaoSecretaria {
 
-    public String insertarSecretaria(Secretaria secretaria) {
+    public boolean insertarSecretaria(Secretaria secretaria) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(secretaria);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-
-        return "Insertado";
+        
+        return response;
     }
 
-    public String modificarSecretaria(Secretaria secretaria) {
+    public boolean modificarSecretaria(Secretaria secretaria) {
         Session session = null;
-
+        boolean response;
+        
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(secretaria);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Modificado";
+        return response;
     }
 
-    public String eliminarSecretaria(Secretaria secretaria) {
+    public boolean eliminarSecretaria(Secretaria secretaria) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(secretaria);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Eliminado";
+        return response;
     }
 
     public List<Secretaria> getListaSecretarias() {
@@ -94,4 +103,18 @@ public class DaoSecretaria {
         return secretaria;
     }
 
+    public List<Secretaria> buscarSecretariasPorNombre(String nombre) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        /**
+         * LIKE en hql funciona como like y un ilike de sql, 
+         * por tanto la consulta será correcta con mayúsculas y minúsculas.
+        */
+        String hql = "FROM Secretaria where nombre_completo LIKE :nombre_completo";
+        Query query = session.createQuery(hql);
+        query.setParameter("nombre_completo", "%"+nombre+"%");
+        List<Secretaria> lista = query.list();
+
+        return lista;
+    }
 }

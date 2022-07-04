@@ -7,7 +7,6 @@ package com.dao;
 
 import com.pojos.Medico;
 import com.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -19,61 +18,70 @@ import org.hibernate.Session;
  */
 public class DaoMedico {
 
-    public String insertarMedico(Medico medico) {
+    public boolean insertarMedico(Medico medico) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(medico);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Insertado";
+        return response;
     }
 
-    public String modificarMedico(Medico medico) {
+    public boolean modificarMedico(Medico medico) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(medico);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Modificado";
+        return response;
     }
 
-    public String eliminarMedico(Medico medico) {
+    public boolean eliminarMedico(Medico medico) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(medico);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Eliminado";
+        return response;
     }
 
     public List<Medico> getListaMedicos() {

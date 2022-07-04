@@ -7,7 +7,6 @@ package com.dao;
 
 import com.pojos.Cirugia;
 import com.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -19,61 +18,70 @@ import org.hibernate.Session;
  */
 public class DaoCirugia {
 
-    public String insertarCirugia(Cirugia cirugia) {
+    public boolean insertarCirugia(Cirugia cirugia) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(cirugia);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Insertado";
+        return response;
     }
 
-    public String modificarCirugia(Cirugia cirugia) {
+    public boolean modificarCirugia(Cirugia cirugia) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(cirugia);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Modificado";
+        return response;
     }
 
-    public String eliminarCirugia(Cirugia cirugia) {
+    public boolean eliminarCirugia(Cirugia cirugia) {
         Session session = null;
+        boolean response;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(cirugia);
             session.getTransaction().commit();
+            response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            response = false;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
 
-        return "Eliminado";
+        return response;
     }
 
     //Retorna todas las cirugias de la BD
