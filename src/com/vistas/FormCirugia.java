@@ -4,9 +4,11 @@ import com.dao.DaoCirugia;
 import com.dao.DaoCirugiaMedico;
 import com.pojos.Cirugia;
 import com.pojos.CirugiaMedico;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.TimeZone;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -25,13 +27,16 @@ public class FormCirugia extends javax.swing.JFrame {
      */
     public static Cirugia cirugia = new Cirugia();
     DaoCirugia daoCirugia = new DaoCirugia();
-     
+
     public static CirugiaMedico cirugiaMedico = new CirugiaMedico();
     DaoCirugiaMedico daoCirugiaMedico = new DaoCirugiaMedico();
 
     public FormCirugia() {
         initComponents();
         this.setLocationRelativeTo(null);
+
+        this.setFechaInTxtFecha();
+        this.setHoraInTxtHora();
     }
 
     /**
@@ -98,9 +103,11 @@ public class FormCirugia extends javax.swing.JFrame {
         jLabel2.setText("Fecha");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 80, 29));
 
+        txtFecha.setEditable(false);
         txtFecha.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel2.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 240, 29));
 
+        txtHora.setEditable(false);
         txtHora.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel2.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 240, 29));
 
@@ -356,8 +363,6 @@ public class FormCirugia extends javax.swing.JFrame {
         daoCirugia.eliminarCirugia(cirugia);
     }
 
-    
-    
     private void limpiarCampos() {
         txtID.setText("");
         txtFecha.setText("");
@@ -365,15 +370,7 @@ public class FormCirugia extends javax.swing.JFrame {
         txtNroSala.setText("");
         txtSecretaria.setText("");
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 //    ************************************DETALLE***************************************************
     private void mostrarDetalleMedicoCirugia() {
         List<CirugiaMedico> detalleListaMedicosDesignados = daoCirugiaMedico.getListaDetalleCirugiaMedicos(Integer.parseInt(txtID.getText()));
@@ -383,10 +380,10 @@ public class FormCirugia extends javax.swing.JFrame {
         detalleListaMedicosDesignados.forEach((obj) -> {
             model.addRow(new Object[]{obj.getId(), obj.getMedico().getId(), obj.getMedico().getNombres() + " " + obj.getMedico().getApellidos()});
         });
-        
+
         tabla.setModel(model);
     }
-    
+
     private void agregarMedicoADetalle() {
         cirugiaMedico = new CirugiaMedico(cirugia, cirugiaMedico.getMedico());
         daoCirugiaMedico.insertarCirugiaMedico(cirugiaMedico);
@@ -403,5 +400,21 @@ public class FormCirugia extends javax.swing.JFrame {
     private void quitarMedicoDeDetalle() {
         cirugiaMedico.setId(Integer.parseInt(txtIDMedico.getText()));
         daoCirugiaMedico.eliminarCirugiaMedico(cirugiaMedico);
+    }
+
+    private void setFechaInTxtFecha() {
+        DateFormat inFormat = new SimpleDateFormat("E, dd MMM yyyy");
+        inFormat.setTimeZone(TimeZone.getTimeZone("America/La_Paz"));
+        Date fechaCirugia = new Date();
+
+        txtFecha.setText(inFormat.format(fechaCirugia));
+    }
+    
+    private void setHoraInTxtHora() {
+        DateFormat inFormat = new SimpleDateFormat("HH:mm");
+        inFormat.setTimeZone(TimeZone.getTimeZone("America/La_Paz"));
+        Date horaCirugia = new Date();
+
+        txtHora.setText(inFormat.format(horaCirugia) + " Hrs.");
     }
 }
