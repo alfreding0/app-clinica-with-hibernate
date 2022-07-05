@@ -30,6 +30,7 @@ public class DaoSecretaria {
             response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            System.out.println(e.getMessage());
             response = false;
         } finally {
             if (session != null) {
@@ -52,6 +53,7 @@ public class DaoSecretaria {
             response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            System.out.println(e.getMessage());
             response = false;
         } finally {
             if (session != null) {
@@ -74,6 +76,7 @@ public class DaoSecretaria {
             response = true;
         } catch (HibernateException e) {
             session.getTransaction().rollback();
+            System.out.println(e.getMessage());
             response = false;
         } finally {
             if (session != null) {
@@ -89,6 +92,7 @@ public class DaoSecretaria {
         String hql = "FROM Secretaria";
         Query query = session.createQuery(hql);
         List<Secretaria> listaSecretarias = query.list();
+        session.close();
 
         return listaSecretarias;
     }
@@ -99,6 +103,7 @@ public class DaoSecretaria {
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
         Secretaria secretaria = (Secretaria) query.uniqueResult();
+        session.close();
 
         return secretaria;
     }
@@ -114,6 +119,7 @@ public class DaoSecretaria {
         Query query = session.createQuery(hql);
         query.setParameter("nombre_completo", "%"+nombre+"%");
         List<Secretaria> lista = query.list();
+        session.close();
 
         return lista;
     }

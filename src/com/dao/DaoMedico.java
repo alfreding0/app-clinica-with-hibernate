@@ -89,6 +89,7 @@ public class DaoMedico {
         String hql = "FROM Medico";
         Query query = session.createQuery(hql);
         List<Medico> listaMedicos = query.list();
+        session.close();
 
         return listaMedicos;
     }
@@ -99,6 +100,7 @@ public class DaoMedico {
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
         Medico medico = (Medico) query.uniqueResult();
+        session.close();
 
         return medico;
     }

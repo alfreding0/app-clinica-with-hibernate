@@ -28,6 +28,7 @@ public class FormMedico extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         this.mostrarListaMedicos();
+        btnEnviar.setVisible(false);
     }
 
     /**
@@ -56,7 +57,7 @@ public class FormMedico extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
         txtCI = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtCelular = new javax.swing.JTextField();
@@ -191,16 +192,16 @@ public class FormMedico extends javax.swing.JFrame {
         });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 140, 40));
 
-        jButton6.setBackground(new java.awt.Color(13, 28, 42));
-        jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 204, 255));
-        jButton6.setText("Enviar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setBackground(new java.awt.Color(13, 28, 42));
+        btnEnviar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnEnviar.setForeground(new java.awt.Color(0, 204, 255));
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 140, 40));
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 140, 40));
 
         txtCI.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel2.add(txtCI, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 260, 29));
@@ -262,19 +263,19 @@ public class FormMedico extends javax.swing.JFrame {
         this.limpiarCampos();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         this.buscarMedicoHastaBD();
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnEnviar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -333,7 +334,7 @@ public class FormMedico extends javax.swing.JFrame {
     }
 
     private void eliminar() {
-        medico.setId(Integer.parseInt(txtID.getText()));
+        medico = daoMedico.buscarMedicoPorID(Integer.parseInt(txtID.getText()));
         daoMedico.eliminarMedico(medico);
     }
 
@@ -350,7 +351,7 @@ public class FormMedico extends javax.swing.JFrame {
     private void buscarMedicoHastaBD() {
         medico = daoMedico.buscarMedicoPorID(Integer.parseInt(txtID.getText()));
         FormCirugia.cirugiaMedico.setMedico(medico);
-        
+
         FormCirugia.txtIDMedico.setText(String.valueOf(medico.getId()));
         FormCirugia.txtNombreMedico.setText(medico.getNombres() + " " + medico.getApellidos());
     }

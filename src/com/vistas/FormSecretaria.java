@@ -1,6 +1,5 @@
 package com.vistas;
 
-
 import com.dao.DaoSecretaria;
 import com.pojos.Secretaria;
 import java.util.List;
@@ -11,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author alfreding0
@@ -23,12 +21,13 @@ public class FormSecretaria extends javax.swing.JFrame {
      */
     Secretaria secretaria = new Secretaria();
     DaoSecretaria daoSecretaria = new DaoSecretaria();
-    
+
     public FormSecretaria() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         this.mostrarListaSecretarias();
+        btnEnviar.setVisible(false);
     }
 
     /**
@@ -51,7 +50,7 @@ public class FormSecretaria extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtCelular = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -126,17 +125,17 @@ public class FormSecretaria extends javax.swing.JFrame {
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 140, 40));
 
-        jButton6.setBackground(new java.awt.Color(13, 28, 42));
-        jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 204, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/enviar.png"))); // NOI18N
-        jButton6.setText("Enviar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setBackground(new java.awt.Color(13, 28, 42));
+        btnEnviar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnEnviar.setForeground(new java.awt.Color(0, 204, 255));
+        btnEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/enviar.png"))); // NOI18N
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 140, 40));
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 140, 40));
 
         jButton5.setBackground(new java.awt.Color(13, 28, 42));
         jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -148,7 +147,7 @@ public class FormSecretaria extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 140, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 140, 40));
 
         jButton3.setBackground(new java.awt.Color(13, 28, 42));
         jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -261,10 +260,10 @@ public class FormSecretaria extends javax.swing.JFrame {
         this.limpiarCampos();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         this.buscarSecretariaHastaBD();
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.buscarSecretariaPorNombre();
@@ -276,12 +275,12 @@ public class FormSecretaria extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnEnviar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -298,22 +297,22 @@ public class FormSecretaria extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrarListaSecretarias(){
-        List<Secretaria> listaSecretarias  = daoSecretaria.getListaSecretarias();
+    private void mostrarListaSecretarias() {
+        List<Secretaria> listaSecretarias = daoSecretaria.getListaSecretarias();
         this.cargarListaATabla(listaSecretarias);
     }
-    
-    private void cargarListaATabla(List<Secretaria> lista){
-        DefaultTableModel model = new DefaultTableModel(null, new String[] {"ID", "Nombre", "Celular", "Direccion"});
-        
+
+    private void cargarListaATabla(List<Secretaria> lista) {
+        DefaultTableModel model = new DefaultTableModel(null, new String[]{"ID", "Nombre", "Celular", "Direccion"});
+
         lista.forEach((secre) -> {
             model.addRow(new Object[]{secre.getId(), secre.getNombreCompleto(), secre.getCelular(), secre.getDireccion()});
         });
-        
+
         tabla.setModel(model);
     }
-    
-    private void insertarNuevo(){
+
+    private void insertarNuevo() {
         secretaria = new Secretaria(txtNombre.getText(), txtCelular.getText(), txtDireccion.getText());
         daoSecretaria.insertarSecretaria(secretaria);
     }
@@ -321,7 +320,7 @@ public class FormSecretaria extends javax.swing.JFrame {
     private void modificarDatos() {
         secretaria = new Secretaria(txtNombre.getText(), txtCelular.getText(), txtDireccion.getText());
         secretaria.setId(Integer.parseInt(txtID.getText()));
-        
+
         daoSecretaria.modificarSecretaria(secretaria);
     }
 
@@ -336,7 +335,7 @@ public class FormSecretaria extends javax.swing.JFrame {
     }
 
     private void eliminar() {
-        secretaria.setId(Integer.parseInt(txtID.getText()));
+        secretaria = daoSecretaria.buscarSecretariaPorID(Integer.parseInt(txtID.getText()));
         daoSecretaria.eliminarSecretaria(secretaria);
     }
 

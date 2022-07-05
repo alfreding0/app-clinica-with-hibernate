@@ -75,6 +75,7 @@ public class FormCirugia extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtNombreMedico = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,11 +104,9 @@ public class FormCirugia extends javax.swing.JFrame {
         jLabel2.setText("Fecha");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 80, 29));
 
-        txtFecha.setEditable(false);
         txtFecha.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel2.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 240, 29));
 
-        txtHora.setEditable(false);
         txtHora.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel2.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 240, 29));
 
@@ -133,7 +132,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 140, 40));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 140, 40));
 
         jButton2.setBackground(new java.awt.Color(13, 28, 42));
         jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -155,7 +154,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 140, 40));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 140, 40));
 
         jButton4.setBackground(new java.awt.Color(13, 28, 42));
         jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -166,11 +165,11 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 140, 40));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 140, 40));
 
         txtID.setEditable(false);
         txtID.setBackground(new java.awt.Color(102, 51, 0));
-        txtID.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtID.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtID.setForeground(new java.awt.Color(255, 255, 255));
         txtID.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtID.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +179,7 @@ public class FormCirugia extends javax.swing.JFrame {
         });
         jPanel2.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 60, 29));
 
+        tabla.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -188,6 +188,7 @@ public class FormCirugia extends javax.swing.JFrame {
 
             }
         ));
+        tabla.setRowHeight(20);
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
@@ -195,7 +196,7 @@ public class FormCirugia extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 370, 120));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 370, 140));
 
         jButton5.setBackground(new java.awt.Color(13, 28, 42));
         jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -206,7 +207,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 140, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 140, 40));
 
         txtNroSala.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel2.add(txtNroSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 240, 29));
@@ -228,7 +229,7 @@ public class FormCirugia extends javax.swing.JFrame {
         jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 80, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 20, 290));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 20, 310));
 
         txtIDMedico.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel2.add(txtIDMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 90, 30));
@@ -263,6 +264,17 @@ public class FormCirugia extends javax.swing.JFrame {
         });
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 150, 40));
 
+        jButton9.setBackground(new java.awt.Color(13, 28, 42));
+        jButton9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(0, 204, 204));
+        jButton9.setText("Ver Listado");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 330, 40));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 850, 430));
 
         pack();
@@ -285,7 +297,6 @@ public class FormCirugia extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.eliminar();
-        this.mostrarDetalleMedicoCirugia();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
@@ -302,16 +313,22 @@ public class FormCirugia extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         new FormSecretaria().setVisible(true);
+        FormSecretaria.btnEnviar.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         new FormMedico().setVisible(true);
+        FormMedico.btnEnviar.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         this.quitarMedicoDeDetalle();
         this.mostrarDetalleMedicoCirugia();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        new FormListaCirugias().setVisible(true);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -323,6 +340,7 @@ public class FormCirugia extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -334,13 +352,13 @@ public class FormCirugia extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable tabla;
-    private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtHora;
-    private javax.swing.JTextField txtID;
+    public static javax.swing.JTable tabla;
+    public static javax.swing.JTextField txtFecha;
+    public static javax.swing.JTextField txtHora;
+    public static javax.swing.JTextField txtID;
     public static javax.swing.JTextField txtIDMedico;
     public static javax.swing.JTextField txtNombreMedico;
-    private javax.swing.JTextField txtNroSala;
+    public static javax.swing.JTextField txtNroSala;
     public static javax.swing.JTextField txtSecretaria;
     // End of variables declaration//GEN-END:variables
 
@@ -359,8 +377,14 @@ public class FormCirugia extends javax.swing.JFrame {
     }
 
     private void eliminar() {
-        cirugia.setId(Integer.parseInt(txtID.getText()));
+        cirugia = daoCirugia.buscarCirugiaPorID(Integer.parseInt(txtID.getText()));
         daoCirugia.eliminarCirugia(cirugia);
+
+        this.limpiarCampos();
+
+        //Vaciar también los objetos para evitar problemas de sobrescripcion
+//        cirugia = new Cirugia();
+//        daoCirugiaMedico = new DaoCirugiaMedico();
     }
 
     private void limpiarCampos() {
@@ -369,22 +393,28 @@ public class FormCirugia extends javax.swing.JFrame {
         txtHora.setText("");
         txtNroSala.setText("");
         txtSecretaria.setText("");
+
+        txtIDMedico.setText("");
+        txtNombreMedico.setText("");
+        tabla.setModel(new DefaultTableModel(null, new String[]{"ID", "COD.MEDICO", "NOMBRE COMPLETO"}));
     }
 
 //    ************************************DETALLE***************************************************
     private void mostrarDetalleMedicoCirugia() {
-        List<CirugiaMedico> detalleListaMedicosDesignados = daoCirugiaMedico.getListaDetalleCirugiaMedicos(Integer.parseInt(txtID.getText()));
+        List detalleListaMedicosDesignados = daoCirugiaMedico.getListaDetalleCM_OnlyString(Integer.parseInt(txtID.getText()));
 
         DefaultTableModel model = new DefaultTableModel(null, new String[]{"ID", "COD.MEDICO", "NOMBRE COMPLETO"});
 
         detalleListaMedicosDesignados.forEach((obj) -> {
-            model.addRow(new Object[]{obj.getId(), obj.getMedico().getId(), obj.getMedico().getNombres() + " " + obj.getMedico().getApellidos()});
+            model.addRow((Object[]) obj);
         });
 
         tabla.setModel(model);
     }
 
     private void agregarMedicoADetalle() {
+        cirugia = daoCirugia.buscarCirugiaPorID(Integer.parseInt(txtID.getText()));
+
         cirugiaMedico = new CirugiaMedico(cirugia, cirugiaMedico.getMedico());
         daoCirugiaMedico.insertarCirugiaMedico(cirugiaMedico);
     }
@@ -403,18 +433,18 @@ public class FormCirugia extends javax.swing.JFrame {
     }
 
     private void setFechaInTxtFecha() {
-        DateFormat inFormat = new SimpleDateFormat("E, dd MMM yyyy");
+        DateFormat inFormat = new SimpleDateFormat("dd/MM/yyyy"); //Otro formato E, dd MMM yyyy
         inFormat.setTimeZone(TimeZone.getTimeZone("America/La_Paz"));
         Date fechaCirugia = new Date();
 
         txtFecha.setText(inFormat.format(fechaCirugia));
     }
-    
+
     private void setHoraInTxtHora() {
         DateFormat inFormat = new SimpleDateFormat("HH:mm");
         inFormat.setTimeZone(TimeZone.getTimeZone("America/La_Paz"));
         Date horaCirugia = new Date();
 
-        txtHora.setText(inFormat.format(horaCirugia) + " Hrs.");
+        txtHora.setText(inFormat.format(horaCirugia));
     }
 }
