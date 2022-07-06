@@ -116,4 +116,15 @@ public class DaoCirugiaMedico {
         
         return listaCirugiaMedico;
     }    
+    
+    public CirugiaMedico findById(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "FROM CirugiaMedico where id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        CirugiaMedico cirugiaMedico = (CirugiaMedico) query.uniqueResult();
+        session.close();
+        
+        return cirugiaMedico;
+    }
 }

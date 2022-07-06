@@ -5,8 +5,14 @@ import com.dao.DaoCirugiaMedico;
 import com.pojos.Cirugia;
 import com.pojos.CirugiaMedico;
 import com.util.HibernateUtil;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SpinnerModel;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -124,15 +130,7 @@ public class FormListaCirugias extends javax.swing.JFrame {
 
         DefaultTableModel model = new DefaultTableModel(null, new String[]{"ID", "FECHA", "HORA", "NROSALA", "SECRETARIA"});
 
-//        for (int i = 0; i < lista.size(); i++) {
-//            model.addRow((Object[]) lista.get(i));
-//        }
-        
         lista.forEach((fila) -> { model.addRow( (Object[]) fila); });
-        
-//        lista.forEach((cirugia) -> {
-//            model.addRow(new Object[]{cirugia.getId(), cirugia.getFecha(), cirugia.getHora(), cirugia.getNroSala(), cirugia.getSecretaria().getNombreCompleto()});
-//        });
 
         tabla.setModel(model);
         
@@ -142,23 +140,33 @@ public class FormListaCirugias extends javax.swing.JFrame {
     private void mostrarDetalleEnFormCirugia() {
         int fila = tabla.getSelectedRow();
         if (fila > -1) {
-            FormCirugia.txtID.setText(tabla.getValueAt(fila, 0).toString());
-            FormCirugia.txtFecha.setText(tabla.getValueAt(fila, 1).toString());
-            FormCirugia.txtHora.setText(tabla.getValueAt(fila, 2).toString());
-            FormCirugia.txtNroSala.setText(tabla.getValueAt(fila, 3).toString());
-            FormCirugia.txtSecretaria.setText(tabla.getValueAt(fila, 4).toString());
-
-            DaoCirugiaMedico daoCirugiaMedico = new DaoCirugiaMedico();
-            List lista = daoCirugiaMedico.getListaDetalleCM_OnlyString(Integer.parseInt(tabla.getValueAt(fila, 0).toString()));
-
-            DefaultTableModel model = new DefaultTableModel(null, new String[]{"ID", "COD.MEDICO", "NOMBRE COMPLETO"});
-
-            lista.forEach((obj) -> { model.addRow( (Object[]) obj ); });
-
-            FormCirugia.tabla.setModel(model);
-            
-            int idCirugia = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
-            FormCirugia.cirugia.setSecretaria(daoCirugia.buscarCirugiaPorID(idCirugia).getSecretaria());
+            try {
+                FormCirugia.txtID.setText(tabla.getValueAt(fila, 0).toString());
+                
+                Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(tabla.getValueAt(fila, 1).toString());
+                FormCirugia.jDateChooser.setDate(fecha);
+                
+                String hora = tabla.getValueAt(fila, 2).toString();
+                FormCirugia.setHourInButtons(hora.substring(0, 2), hora.substring(3, 5));
+                
+                FormCirugia.txtNroSala.getModel().setValue(Integer.parseInt(tabla.getValueAt(fila, 3).toString()));
+                
+                FormCirugia.txtSecretaria.setText(tabla.getValueAt(fila, 4).toString());
+                
+                DaoCirugiaMedico daoCirugiaMedico = new DaoCirugiaMedico();
+                List lista = daoCirugiaMedico.getListaDetalleCM_OnlyString(Integer.parseInt(tabla.getValueAt(fila, 0).toString()));
+                
+                DefaultTableModel model = new DefaultTableModel(null, new String[]{"ID", "COD.MEDICO", "NOMBRE COMPLETO"});
+                
+                lista.forEach((obj) -> { model.addRow( (Object[]) obj ); });
+                
+                FormCirugia.tabla.setModel(model);
+                
+                int idCirugia = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
+                FormCirugia.cirugia.setSecretaria(daoCirugia.buscarCirugiaPorID(idCirugia).getSecretaria());
+            } catch (ParseException ex) {
+                Logger.getLogger(FormListaCirugias.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

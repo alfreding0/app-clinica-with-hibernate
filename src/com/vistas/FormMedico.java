@@ -352,7 +352,7 @@ public class FormMedico extends javax.swing.JFrame {
         medico = daoMedico.buscarMedicoPorID(Integer.parseInt(txtID.getText()));
         FormCirugia.cirugiaMedico.setMedico(medico);
 
-        FormCirugia.txtIDMedico.setText(String.valueOf(medico.getId()));
+        FormCirugia.txtIDDetalle.setText(String.valueOf(medico.getId()));
         FormCirugia.txtNombreMedico.setText(medico.getNombres() + " " + medico.getApellidos());
     }
 }

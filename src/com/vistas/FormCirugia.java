@@ -4,11 +4,15 @@ import com.dao.DaoCirugia;
 import com.dao.DaoCirugiaMedico;
 import com.pojos.Cirugia;
 import com.pojos.CirugiaMedico;
+import com.pojos.Medico;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -35,8 +39,8 @@ public class FormCirugia extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
 
-        this.setFechaInTxtFecha();
-        this.setHoraInTxtHora();
+        this.setFechaInDateChooser();
+        this.setHourNowButtons();
     }
 
     /**
@@ -48,13 +52,15 @@ public class FormCirugia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupHoral = new javax.swing.ButtonGroup();
+        buttonGroupMinuto = new javax.swing.ButtonGroup();
+        buttonGroupTurno = new javax.swing.ButtonGroup();
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
-        txtHora = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtSecretaria = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -66,16 +72,36 @@ public class FormCirugia extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        txtNroSala = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblNroSal = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        txtIDMedico = new javax.swing.JTextField();
+        txtIDDetalle = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtNombreMedico = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        hora06 = new javax.swing.JRadioButton();
+        hora01 = new javax.swing.JRadioButton();
+        hora02 = new javax.swing.JRadioButton();
+        hora03 = new javax.swing.JRadioButton();
+        hora05 = new javax.swing.JRadioButton();
+        hora04 = new javax.swing.JRadioButton();
+        hora07 = new javax.swing.JRadioButton();
+        hora08 = new javax.swing.JRadioButton();
+        hora09 = new javax.swing.JRadioButton();
+        hora11 = new javax.swing.JRadioButton();
+        hora10 = new javax.swing.JRadioButton();
+        hora12 = new javax.swing.JRadioButton();
+        minEnMedia = new javax.swing.JRadioButton();
+        minEnPunto = new javax.swing.JRadioButton();
+        turnoAM = new javax.swing.JRadioButton();
+        turnoPM = new javax.swing.JRadioButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
+        txtNroSala = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -97,31 +123,25 @@ public class FormCirugia extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Médicos designados");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 370, 39));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 370, 39));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fecha");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 80, 29));
-
-        txtFecha.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 240, 29));
-
-        txtHora.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 240, 29));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, 29));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Hora");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 80, 29));
+        jLabel3.setText("Minuto");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 80, 29));
 
         txtSecretaria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtSecretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 160, 29));
+        jPanel2.add(txtSecretaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 190, 29));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Medico________________________________________");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 370, 29));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 370, 29));
 
         jButton1.setBackground(new java.awt.Color(13, 28, 42));
         jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -132,7 +152,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 140, 40));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, 140, 40));
 
         jButton2.setBackground(new java.awt.Color(13, 28, 42));
         jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -143,7 +163,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 140, 40));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 140, 40));
 
         jButton3.setBackground(new java.awt.Color(13, 28, 42));
         jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -154,7 +174,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 140, 40));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 40));
 
         jButton4.setBackground(new java.awt.Color(13, 28, 42));
         jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -165,7 +185,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 140, 40));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 140, 40));
 
         txtID.setEditable(false);
         txtID.setBackground(new java.awt.Color(102, 51, 0));
@@ -177,7 +197,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 txtIDActionPerformed(evt);
             }
         });
-        jPanel2.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 60, 29));
+        jPanel2.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 130, 29));
 
         tabla.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -196,7 +216,7 @@ public class FormCirugia extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 370, 140));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 370, 230));
 
         jButton5.setBackground(new java.awt.Color(13, 28, 42));
         jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -207,15 +227,12 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 140, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 140, 40));
 
-        txtNroSala.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtNroSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 240, 29));
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Nro Sala");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 80, 29));
+        lblNroSal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblNroSal.setForeground(new java.awt.Color(255, 255, 255));
+        lblNroSal.setText("Nro Sala");
+        jPanel2.add(lblNroSal, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 70, 29));
 
         jButton6.setBackground(new java.awt.Color(13, 28, 42));
         jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -226,13 +243,10 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 80, -1));
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 100, -1));
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 20, 310));
-
-        txtIDMedico.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtIDMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 90, 30));
+        txtIDDetalle.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jPanel2.add(txtIDDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 90, 30));
 
         jButton7.setBackground(new java.awt.Color(13, 28, 42));
         jButton7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -243,15 +257,15 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 80, 30));
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 80, 30));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Secretaria");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 80, 29));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 80, 29));
 
         txtNombreMedico.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jPanel2.add(txtNombreMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 200, 30));
+        jPanel2.add(txtNombreMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 200, 30));
 
         jButton8.setBackground(new java.awt.Color(13, 28, 42));
         jButton8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -262,7 +276,7 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 150, 40));
+        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 150, 40));
 
         jButton9.setBackground(new java.awt.Color(13, 28, 42));
         jButton9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -273,9 +287,112 @@ public class FormCirugia extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 330, 40));
+        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 370, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 850, 430));
+        jPanel3.setBackground(new java.awt.Color(26, 72, 107));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGroupHoral.add(hora06);
+        hora06.setForeground(new java.awt.Color(255, 255, 255));
+        hora06.setText("06");
+        jPanel3.add(hora06, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+
+        buttonGroupHoral.add(hora01);
+        hora01.setForeground(new java.awt.Color(255, 255, 255));
+        hora01.setText("01");
+        jPanel3.add(hora01, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        buttonGroupHoral.add(hora02);
+        hora02.setForeground(new java.awt.Color(255, 255, 255));
+        hora02.setText("02");
+        jPanel3.add(hora02, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+
+        buttonGroupHoral.add(hora03);
+        hora03.setForeground(new java.awt.Color(255, 255, 255));
+        hora03.setText("03");
+        jPanel3.add(hora03, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+
+        buttonGroupHoral.add(hora05);
+        hora05.setForeground(new java.awt.Color(255, 255, 255));
+        hora05.setText("05");
+        jPanel3.add(hora05, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+
+        buttonGroupHoral.add(hora04);
+        hora04.setForeground(new java.awt.Color(255, 255, 255));
+        hora04.setText("04");
+        jPanel3.add(hora04, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+
+        buttonGroupHoral.add(hora07);
+        hora07.setForeground(new java.awt.Color(255, 255, 255));
+        hora07.setText("07");
+        jPanel3.add(hora07, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        buttonGroupHoral.add(hora08);
+        hora08.setForeground(new java.awt.Color(255, 255, 255));
+        hora08.setText("08");
+        jPanel3.add(hora08, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+
+        buttonGroupHoral.add(hora09);
+        hora09.setForeground(new java.awt.Color(255, 255, 255));
+        hora09.setText("09");
+        jPanel3.add(hora09, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
+
+        buttonGroupHoral.add(hora11);
+        hora11.setForeground(new java.awt.Color(255, 255, 255));
+        hora11.setText("11");
+        jPanel3.add(hora11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
+
+        buttonGroupHoral.add(hora10);
+        hora10.setForeground(new java.awt.Color(255, 255, 255));
+        hora10.setText("10");
+        jPanel3.add(hora10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
+
+        buttonGroupHoral.add(hora12);
+        hora12.setForeground(new java.awt.Color(255, 255, 255));
+        hora12.setText("12");
+        jPanel3.add(hora12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
+
+        buttonGroupMinuto.add(minEnMedia);
+        minEnMedia.setForeground(new java.awt.Color(255, 255, 255));
+        minEnMedia.setText("30");
+        jPanel3.add(minEnMedia, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 60, -1));
+
+        buttonGroupMinuto.add(minEnPunto);
+        minEnPunto.setForeground(new java.awt.Color(255, 255, 255));
+        minEnPunto.setText("00");
+        jPanel3.add(minEnPunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 50, -1));
+
+        turnoAM.setBackground(new java.awt.Color(0, 51, 51));
+        buttonGroupTurno.add(turnoAM);
+        turnoAM.setForeground(new java.awt.Color(255, 255, 255));
+        turnoAM.setText("AM");
+        jPanel3.add(turnoAM, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 50, -1));
+
+        turnoPM.setBackground(new java.awt.Color(0, 51, 51));
+        buttonGroupTurno.add(turnoPM);
+        turnoPM.setForeground(new java.awt.Color(255, 255, 255));
+        turnoPM.setText("PM");
+        jPanel3.add(turnoPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 50, -1));
+
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 10, 30));
+
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 290, 10));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 310, 110));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Hora");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 80, 29));
+        jPanel2.add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 150, 30));
+
+        txtNroSala.setModel(new javax.swing.SpinnerNumberModel(1, 1, 50, 1));
+        jPanel2.add(txtNroSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 70, 30));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 850, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -332,6 +449,21 @@ public class FormCirugia extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupHoral;
+    private javax.swing.ButtonGroup buttonGroupMinuto;
+    private javax.swing.ButtonGroup buttonGroupTurno;
+    public static javax.swing.JRadioButton hora01;
+    public static javax.swing.JRadioButton hora02;
+    public static javax.swing.JRadioButton hora03;
+    public static javax.swing.JRadioButton hora04;
+    public static javax.swing.JRadioButton hora05;
+    public static javax.swing.JRadioButton hora06;
+    public static javax.swing.JRadioButton hora07;
+    public static javax.swing.JRadioButton hora08;
+    public static javax.swing.JRadioButton hora09;
+    public static javax.swing.JRadioButton hora10;
+    public static javax.swing.JRadioButton hora11;
+    public static javax.swing.JRadioButton hora12;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -341,36 +473,43 @@ public class FormCirugia extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    public static com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lblNroSal;
+    public static javax.swing.JRadioButton minEnMedia;
+    public static javax.swing.JRadioButton minEnPunto;
     public static javax.swing.JTable tabla;
-    public static javax.swing.JTextField txtFecha;
-    public static javax.swing.JTextField txtHora;
+    public static javax.swing.JRadioButton turnoAM;
+    public static javax.swing.JRadioButton turnoPM;
     public static javax.swing.JTextField txtID;
-    public static javax.swing.JTextField txtIDMedico;
+    public static javax.swing.JTextField txtIDDetalle;
     public static javax.swing.JTextField txtNombreMedico;
-    public static javax.swing.JTextField txtNroSala;
+    public static javax.swing.JSpinner txtNroSala;
     public static javax.swing.JTextField txtSecretaria;
     // End of variables declaration//GEN-END:variables
 
 //************************CIRUGIA***********************************
     private void insertarNuevo() {
-        cirugia = new Cirugia(cirugia.getSecretaria(), new Date(), new Date(), Integer.parseInt(txtNroSala.getText()));
+        cirugia = new Cirugia(cirugia.getSecretaria(), jDateChooser.getDate(), this.getHourSelected(), Integer.parseInt(lblNroSal.getText()));
         daoCirugia.insertarCirugia(cirugia);
         txtID.setText(String.valueOf(cirugia.getId()));
     }
 
     private void modificarDatos() {
-        cirugia = new Cirugia(cirugia.getSecretaria(), new Date(), new Date(), Integer.parseInt(txtNroSala.getText()));
+        cirugia = new Cirugia(cirugia.getSecretaria(), new Date(), new Date(), Integer.parseInt(lblNroSal.getText()));
         cirugia.setId(Integer.parseInt(txtID.getText()));
 
         daoCirugia.modificarCirugia(cirugia);
@@ -381,24 +520,24 @@ public class FormCirugia extends javax.swing.JFrame {
         daoCirugia.eliminarCirugia(cirugia);
 
         this.limpiarCampos();
-
-        //Vaciar también los objetos para evitar problemas de sobrescripcion
-//        cirugia = new Cirugia();
-//        daoCirugiaMedico = new DaoCirugiaMedico();
     }
 
     private void limpiarCampos() {
         txtID.setText("");
-        txtFecha.setText("");
-        txtHora.setText("");
-        txtNroSala.setText("");
+        txtNroSala.getModel().setValue(1);
         txtSecretaria.setText("");
+        this.setHourNowButtons();
+        jDateChooser.setDate(new Date());
 
-        txtIDMedico.setText("");
+        txtIDDetalle.setText("");
         txtNombreMedico.setText("");
         tabla.setModel(new DefaultTableModel(null, new String[]{"ID", "COD.MEDICO", "NOMBRE COMPLETO"}));
     }
 
+    
+    
+    
+    
 //    ************************************DETALLE***************************************************
     private void mostrarDetalleMedicoCirugia() {
         List detalleListaMedicosDesignados = daoCirugiaMedico.getListaDetalleCM_OnlyString(Integer.parseInt(txtID.getText()));
@@ -417,34 +556,266 @@ public class FormCirugia extends javax.swing.JFrame {
 
         cirugiaMedico = new CirugiaMedico(cirugia, cirugiaMedico.getMedico());
         daoCirugiaMedico.insertarCirugiaMedico(cirugiaMedico);
+        
+        //Limpiar los campos
+        txtIDDetalle.setText("");
+        txtNombreMedico.setText("");
+        cirugia = new Cirugia();
+        cirugiaMedico.setMedico(new Medico());
     }
 
     private void copiarFilaACampoDeEdicion() {
         int fila = tabla.getSelectedRow();
         if (fila > -1) {
-            txtIDMedico.setText(tabla.getValueAt(fila, 0).toString());
+            txtIDDetalle.setText(tabla.getValueAt(fila, 0).toString());
             txtNombreMedico.setText(tabla.getValueAt(fila, 2).toString());
         }
     }
 
     private void quitarMedicoDeDetalle() {
-        cirugiaMedico.setId(Integer.parseInt(txtIDMedico.getText()));
-        daoCirugiaMedico.eliminarCirugiaMedico(cirugiaMedico);
+        daoCirugiaMedico.eliminarCirugiaMedico(daoCirugiaMedico.findById(Integer.parseInt(txtIDDetalle.getText())));
+        
+        //Limpiar los campos
+        txtIDDetalle.setText("");
+        txtNombreMedico.setText("");
+        cirugia = new Cirugia();
+        cirugiaMedico.setMedico(new Medico());
     }
 
+    //este metodo ya no se ocupa, porque lo reemplamos por otro
     private void setFechaInTxtFecha() {
         DateFormat inFormat = new SimpleDateFormat("dd/MM/yyyy"); //Otro formato E, dd MMM yyyy
         inFormat.setTimeZone(TimeZone.getTimeZone("America/La_Paz"));
         Date fechaCirugia = new Date();
-
-        txtFecha.setText(inFormat.format(fechaCirugia));
+        //txtFecha.setText(inFormat.format(fechaCirugia));
+    }
+    
+    private void setFechaInDateChooser(){
+        jDateChooser.setDate(new Date());
     }
 
-    private void setHoraInTxtHora() {
+    private void setHourNowButtons() {
         DateFormat inFormat = new SimpleDateFormat("HH:mm");
         inFormat.setTimeZone(TimeZone.getTimeZone("America/La_Paz"));
         Date horaCirugia = new Date();
+        String horaFormateado = inFormat.format(horaCirugia);
+        FormCirugia.setHourInButtons(horaFormateado.substring(0, 2), horaFormateado.substring(3, 4));
+    }
 
-        txtHora.setText(inFormat.format(horaCirugia));
+    private String hora = null, minuto = null, turno = null;
+
+    private boolean isSelectedHourMinuteTurn() {
+        boolean selectedAll = true;
+
+        if (hora01.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "01";
+            } else if (turnoPM.isSelected()) {
+                hora = "13";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora02.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "02";
+            } else if (turnoPM.isSelected()) {
+                hora = "14";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora03.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "03";
+            } else if (turnoPM.isSelected()) {
+                hora = "15";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora04.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "04";
+            } else if (turnoPM.isSelected()) {
+                hora = "16";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora05.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "05";
+            } else if (turnoPM.isSelected()) {
+                hora = "17";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora06.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "06";
+            } else if (turnoPM.isSelected()) {
+                hora = "18";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora07.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "07";
+            } else if (turnoPM.isSelected()) {
+                hora = "19";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora08.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "08";
+            } else if (turnoPM.isSelected()) {
+                hora = "20";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora09.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "09";
+            } else if (turnoPM.isSelected()) {
+                hora = "21";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora10.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "10";
+            } else if (turnoPM.isSelected()) {
+                hora = "22";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora11.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "11";
+            } else if (turnoPM.isSelected()) {
+                hora = "23";
+            } else {
+                selectedAll = false;
+            }
+        } else if (hora12.isSelected()) {
+            if (turnoAM.isSelected()) {
+                hora = "00";
+            } else if (turnoPM.isSelected()) {
+                hora = "12";
+            } else {
+                selectedAll = false;
+            }
+        } else {
+            selectedAll = false;
+        }
+
+        if (minEnPunto.isSelected()) {
+            minuto = "00";
+        } else if (minEnMedia.isSelected()) {
+            minuto = "30";
+        } else {
+            selectedAll = false;
+        }
+
+        return selectedAll;
+    }
+
+    private String getHour() {
+        if (this.isSelectedHourMinuteTurn()) {
+            return hora + ":" + minuto;
+        } else {
+            return null;
+        }
+    }
+
+    private Date getHourSelected() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+            Date hourFormated = sdf.parse(getHour() + ":00");
+            return hourFormated;
+        } catch (ParseException ex) {
+            Logger.getLogger(FormCirugia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static void setHourInButtons(String hour, String minute){
+        if (hour.equals("01") || hour.equals("1")) {
+            hora01.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("02") || hour.equals("2")) {
+            hora02.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("03") || hour.equals("3")) {
+            hora03.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("04") || hour.equals("4")) {
+            hora04.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("05") || hour.equals("5")) {
+            hora05.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("06") || hour.equals("6")) {
+            hora06.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("07") || hour.equals("7")) {
+            hora07.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("08") || hour.equals("8")) {
+            hora08.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("09") || hour.equals("9")) {
+            hora09.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("10")) {
+            hora10.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("11")) {
+            hora11.setSelected(true);
+            turnoAM.setSelected(true);
+        } else if (hour.equals("12")) {
+            hora12.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("13")) {
+            hora01.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("14")) {
+            hora02.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("15")) {
+            hora03.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("16")) {
+            hora04.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("17")) {
+            hora05.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("18")) {
+            hora06.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("19")) {
+            hora07.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("20")) {
+            hora08.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("21")) {
+            hora09.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("22")) {
+            hora10.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("23")) {
+            hora11.setSelected(true);
+            turnoPM.setSelected(true);
+        } else if (hour.equals("00")) {
+            hora12.setSelected(true);
+            turnoAM.setSelected(true);
+        }
+
+        if ((minute.equals("00")) || (Integer.parseInt(minute) < 3)) {
+            minEnPunto.setSelected(true);
+        } else if ((minute.equals("30")) || (Integer.parseInt(minute) >= 3)) {
+            minEnMedia.setSelected(true);
+        }
     }
 }
