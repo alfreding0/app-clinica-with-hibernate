@@ -503,7 +503,7 @@ public class FormCirugia extends javax.swing.JFrame {
 
 //************************CIRUGIA***********************************
     private void insertarNuevo() {
-        cirugia = new Cirugia(cirugia.getSecretaria(), jDateChooser.getDate(), this.getHourSelected(), Integer.parseInt(lblNroSal.getText()));
+        cirugia = new Cirugia(cirugia.getSecretaria(), jDateChooser.getDate(), this.getHourSelected(), Integer.parseInt(txtNroSala.getValue().toString()));
         daoCirugia.insertarCirugia(cirugia);
         txtID.setText(String.valueOf(cirugia.getId()));
     }
