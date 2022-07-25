@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jul 2, 2022 3:13:57 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jul 25, 2022 12:39:37 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.pojos.CirugiaMedico" table="cirugia_medico" catalog="db_clinica" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
+    <class name="com.pojos.CirugiaMedico" table="cirugia_medico" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="sequence">
+                <param name="sequence">cirugia_medico_id_seq</param>
+            </generator>
         </id>
         <many-to-one name="cirugia" class="com.pojos.Cirugia" fetch="select">
             <column name="cirugia_id" not-null="true" />

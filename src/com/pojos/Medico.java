@@ -1,13 +1,11 @@
 package com.pojos;
-// Generated Jul 2, 2022 3:13:56 PM by Hibernate Tools 4.3.1
+// Generated Jul 25, 2022 12:39:37 AM by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,11 +15,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "medico",
-         catalog = "db_clinica"
+         schema = "public"
 )
 public class Medico implements java.io.Serializable {
 
-    private Integer id;
+    private int id;
     private String codigoInterno;
     private String nombres;
     private String apellidos;
@@ -42,7 +40,8 @@ public class Medico implements java.io.Serializable {
         this.direccion = direccion;
     }
 
-    public Medico(String codigoInterno, String nombres, String apellidos, String ci, String celular, String direccion, Set<CirugiaMedico> cirugiaMedicos) {
+    public Medico(int id, String codigoInterno, String nombres, String apellidos, String ci, String celular, String direccion, Set<CirugiaMedico> cirugiaMedicos) {
+        this.id = id;
         this.codigoInterno = codigoInterno;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -53,14 +52,13 @@ public class Medico implements java.io.Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
 
     @Column(name = "id", unique = true, nullable = false)
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -40,9 +40,9 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="db_clinica"/>
-  <table-filter match-name="cirugia"/>
-  <table-filter match-name="secretaria"/>
+  <schema-selection match-catalog="db_clinica" match-schema="public"/>
   <table-filter match-name="cirugia_medico"/>
   <table-filter match-name="medico"/>
+  <table-filter match-name="secretaria"/>
+  <table-filter match-name="cirugia"/>
 </hibernate-reverse-engineering>

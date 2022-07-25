@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Jul 2, 2022 3:13:56 PM by Hibernate Tools 4.3.1
+// Generated Jul 25, 2022 12:39:37 AM by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,11 +20,11 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "cirugia",
-         catalog = "db_clinica"
+         schema = "public"
 )
 public class Cirugia implements java.io.Serializable {
 
-    private Integer id;
+    private int id;
     private Secretaria secretaria;
     private Date fecha;
     private Date hora;
@@ -36,6 +34,14 @@ public class Cirugia implements java.io.Serializable {
     public Cirugia() {
     }
 
+    public Cirugia(int id, Secretaria secretaria, Date fecha, Date hora, int nroSala) {
+        this.id = id;
+        this.secretaria = secretaria;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.nroSala = nroSala;
+    }
+
     public Cirugia(Secretaria secretaria, Date fecha, Date hora, int nroSala) {
         this.secretaria = secretaria;
         this.fecha = fecha;
@@ -43,7 +49,8 @@ public class Cirugia implements java.io.Serializable {
         this.nroSala = nroSala;
     }
 
-    public Cirugia(Secretaria secretaria, Date fecha, Date hora, int nroSala, Set<CirugiaMedico> cirugiaMedicos) {
+    public Cirugia(int id, Secretaria secretaria, Date fecha, Date hora, int nroSala, Set<CirugiaMedico> cirugiaMedicos) {
+        this.id = id;
         this.secretaria = secretaria;
         this.fecha = fecha;
         this.hora = hora;
@@ -52,14 +59,12 @@ public class Cirugia implements java.io.Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-
     @Column(name = "id", unique = true, nullable = false)
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -74,7 +79,7 @@ public class Cirugia implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "fecha", nullable = false, length = 10)
+    @Column(name = "fecha", nullable = false, length = 13)
     public Date getFecha() {
         return this.fecha;
     }
@@ -84,7 +89,7 @@ public class Cirugia implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.TIME)
-    @Column(name = "hora", nullable = false, length = 8)
+    @Column(name = "hora", nullable = false, length = 15)
     public Date getHora() {
         return this.hora;
     }

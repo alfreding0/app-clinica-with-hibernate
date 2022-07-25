@@ -41,16 +41,16 @@ Contributor(s):
 -->
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_clinica?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/db_clinica</property>
+    <property name="hibernate.connection.username">alfreding0</property>
+    <property name="hibernate.connection.password">alfreding0pass</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.format_sql">true</property>
-    <mapping resource="com/pojos/Cirugia.hbm.xml"/>
-    <mapping resource="com/pojos/CirugiaMedico.hbm.xml"/>
     <mapping resource="com/pojos/Secretaria.hbm.xml"/>
+    <mapping resource="com/pojos/CirugiaMedico.hbm.xml"/>
     <mapping resource="com/pojos/Medico.hbm.xml"/>
+    <mapping resource="com/pojos/Cirugia.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

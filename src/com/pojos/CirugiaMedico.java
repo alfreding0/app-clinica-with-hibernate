@@ -1,11 +1,9 @@
 package com.pojos;
-// Generated Jul 2, 2022 3:13:56 PM by Hibernate Tools 4.3.1
+// Generated Jul 25, 2022 12:39:37 AM by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,11 +14,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "cirugia_medico",
-         catalog = "db_clinica"
+         schema = "public"
 )
 public class CirugiaMedico implements java.io.Serializable {
 
-    private Integer id;
+    private int id;
     private Cirugia cirugia;
     private Medico medico;
 
@@ -31,16 +29,21 @@ public class CirugiaMedico implements java.io.Serializable {
         this.cirugia = cirugia;
         this.medico = medico;
     }
+        
+    public CirugiaMedico(int id, Cirugia cirugia, Medico medico) {
+        this.id = id;
+        this.cirugia = cirugia;
+        this.medico = medico;
+    }
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
 
     @Column(name = "id", unique = true, nullable = false)
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
